@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Header from "@/components/Header";
+import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,21 +17,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} flex flex-col min-h-screen overflow-hidden`}
-      >
-        {/* Toaster */}
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${inter.className} flex flex-col min-h-screen overflow-hidden`}
+        >
+          {/* Toaster */}
 
-        {/* Header */}
-        <header className="border-b sticky z-50 bg-white top-0">
-          <Header />
-        </header>
+          {/* Header */}
+          <header className="border-b sticky z-50 bg-white top-0">
+            <Header />
+          </header>
 
-        <div className="bg-[#f4f2ed] flex-1 w-full">
-          <main>{children}</main>
-        </div>
-      </body>
-    </html>
+          <div className="bg-[#f4f2ed] flex-1 w-full">
+            <main>{children}</main>
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
