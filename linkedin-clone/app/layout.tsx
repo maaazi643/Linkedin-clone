@@ -21,7 +21,7 @@ export default function RootLayout({
         {/* Toaster */}
 
         {/* Header */}
-        <header>
+        <header className="border-b sticky z-50 bg-white top-0">
           <Header />
         </header>
 
