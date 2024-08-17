@@ -3,8 +3,9 @@
 import { useUser } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 function PostForm() {
   const ref = useRef<HTMLFormElement>(null);
@@ -20,8 +21,8 @@ function PostForm() {
     }
   };
   return (
-    <div>
-      <form action="" ref={ref}>
+    <div className="mb-2">
+      <form action="" ref={ref} className="p-3 bg-white rounded-lg border">
         <div className=" flex items-center space-x-2">
           <Avatar>
             {user?.id ? (
@@ -55,17 +56,38 @@ function PostForm() {
             Post
           </button>
         </div>
-
         {/* Preview Conditional Check */}
-        <div>
+        {preview && (
+          <div className="mt-3">
+            <Image
+              src={preview}
+              width={100}
+              height={100}
+              alt="preview"
+              className="w-full object-cover"
+            />
+          </div>
+        )}
+        <div className="flex mt-2 justify-end space-x-2">
           <Button type="button" onClick={() => fileInputRef.current?.click()}>
             <ImageIcon className="mr-2" size={16} color="currentColor" />
-            Add Image
+            {preview ? "Change" : "Add"} image
           </Button>
 
           {/* Add a remove preview button */}
+          {preview && (
+            <Button
+              variant="outline"
+              type="button"
+              onClick={() => setPreview(null)}
+            >
+              <XIcon className="mr-2" size={16} color="currentColor" />
+              Remove image
+            </Button>
+          )}
         </div>
       </form>
+      <hr className="mt-2 border-gray-300" />
     </div>
   );
 }
