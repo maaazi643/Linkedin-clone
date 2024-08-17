@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 import { ImageIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { error } from "console";
 import createPostAction from "@/actions/createPostAction";
 
 function PostForm() {
